@@ -177,7 +177,7 @@ describe("Forwards test", function() {
     }); 
   });
   describe('#add listenner test', function() {
-    it('should put event handles to head', function(done) {
+    it('should put event handles', function(done) {
       server.removeAllListeners('connection');
       server.once('connection', function(socket) {
         socket.on('data', function(data) {
@@ -185,34 +185,10 @@ describe("Forwards test", function() {
         });
         var fwd = Forwards.connect(socket, to);
         fwd.fromSocket._events.data.should.have.length(2);
-        fwd.fromSocket._events.data[0].should.equal(fwd.eventHandles.data);
+        fwd.fromSocket._events.data[1].should.equal(fwd.eventHandles.data);
         socket.end();
         done();
       });
-      net.connect(port, 'localhost');
-    });
-
-    it('should put event handles to head even more than max handles', function(done) {
-      done = pending(2, done);
-      server.once('connection', function(socket) {
-        socket.setMaxListeners(2);
-        socket.on('data', function(data){});
-        socket.on('data', function(data){});
-        var fwd = Forwards.connect(socket, to);
-        socket.end();
-        done();
-      });
-      var error = console.error;
-      console.error = function(data) {
-        data.should.include('(node) warning: possible EventEmitter memory leak detected.');
-        console.error = error;
-        done();
-      }
-      var trace = console.trace;
-      console.trace = function() {
-        console.trace = trace;
-        done();
-      }
       net.connect(port, 'localhost');
     });
   });

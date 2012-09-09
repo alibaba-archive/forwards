@@ -9,5 +9,5 @@ forwards.connect(server, 'localhost:7891');
 server = http.createServer();
 server.listen(7872);
 server.on('connection', function(socket) {
-  forwards.connect(socket, 'localhost:7891');
+  forwards.connect(socket, 'localhost:7892');
 });
