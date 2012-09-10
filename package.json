@@ -1,7 +1,7 @@
 {
   "name": "forwards",
   "description": "Make server forwards all data to another. So you can send online traffic to develop env",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": {
     "type": "git",
     "url": "git@github.com:dead-horse/forwards.git"
