@@ -8,12 +8,15 @@ You can use the exports function `connect`
 
 ```js
 var forwards = require('forwards');
+
 /**
  * exports function connect
- * forwards all data from `from` to `to`
+ * connect `from` to `to`, forwards all data 
  * @param  {Server,Socket} from    
  * @param  {Array,String} to      
- * @param  {Number} reconnectTime    when socket end, wait reconnectTime to reconnect, if <= 0, never reconnect
+ * @param {Object} options 
+ *  - {Number} reconnectTime
+ *  - {Number} delay       forwards delay. defalut forwards 10ms latter
  */
 forwards.connect(from, to, reconnectTime);
 ```
