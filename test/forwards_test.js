@@ -61,8 +61,10 @@ describe("Forwards test", function() {
       clients.push(net.connect(port, 'localhost'));
       setTimeout(function() {
         forwards[0].fromSocket._events.should.have.keys(['data', 'end', 'close']);
-        should.not.exist(forwards[0].client);
-        done();   
+        setTimeout (function () {
+          should.not.exist(forwards[0].client);
+          done();   
+        }, 10);
       }, 10);
     });
 
@@ -113,7 +115,7 @@ describe("Forwards test", function() {
       forwards[1].client.end();
       setTimeout(function() {
         should.not.exist(forwards[1].client);
-      }, 10);
+      }, 20);
       setTimeout(function() {
         (forwards[1].client instanceof net.Socket).should.be.ok;
         sockets[2].once('data', function(data) {
@@ -121,7 +123,7 @@ describe("Forwards test", function() {
           done();
         });
         clients[1].write(new Buffer('another test'));
-      }, 110);
+      }, 120);
     }); 
 
     it('should forwards end ok', function(done) {
