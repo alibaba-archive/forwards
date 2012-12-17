@@ -37,7 +37,7 @@ describe("Forwards test", function() {
   describe('#common forwards', function() {
     before(function() {
       server.on('connection', function(socket) {
-        forwards.push(Forwards.connect(socket, to, 100));
+        forwards.push(Forwards.connect(socket, to, {reconnectTime: 100}));
       });
     });
     after(function() {
